@@ -6,8 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [Header("µ±Ç°¹Ø¿¨ÉèÖÃ")]
-    public int currentLevelIndex = 0; // 0=µÚ1¹Ø£¬1=µÚ2¹Ø£¬ÒÔ´ËÀàÍÆ
+    [Header("ï¿½ï¿½Ç°ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public int currentLevelIndex = 0; // 0=ï¿½ï¿½1ï¿½Ø£ï¿½1=ï¿½ï¿½2ï¿½Ø£ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½
     public int targetBeanCount = 10;
     public float gameTime = 60f;
 
@@ -18,11 +18,11 @@ public class GameManager : MonoBehaviour
     public GameObject successPanel;
     public GameObject menuPanel;
 
-    [Header("¾¯¸æÉèÖÃ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public float warningTime = 10f;
     public float flashSpeed = 0.2f;
 
-    [Header("ÒôÐ§")]
+    [Header("ï¿½ï¿½Ð§")]
     public AudioClip eatBeanClip;
     [Range(0, 1)] public float beanVolume = 0.7f;
 
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // ¼ÓÔØ¹Ø¿¨Ê±£¬Í¬²½Ä¿±êÊý¾Ýµ½È«¾Ö¹ÜÀíÆ÷
+        // ï¿½ï¿½ï¿½Ø¹Ø¿ï¿½Ê±ï¿½ï¿½Í¬ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½È«ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½
         if (LevelProgressManager.Instance != null)
         {
             LevelProgressManager.Instance.SetLevelTarget(currentLevelIndex, targetBeanCount, gameTime);
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         currentTime -= Time.deltaTime;
         UpdateTimeUI();
 
-        // ÊµÊ±Í¬²½½ø¶Èµ½È«¾Ö¹ÜÀíÆ÷
+        // ÊµÊ±Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Èµï¿½È«ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½
         if (LevelProgressManager.Instance != null)
         {
             LevelProgressManager.Instance.UpdateLevelProgress(currentLevelIndex, currentScore, currentTime);
@@ -139,10 +139,10 @@ public class GameManager : MonoBehaviour
         timeText.color = Color.red;
     }
 
-    public void AddScore()
+    public void AddScore(int value = 1)
     {
         if (isGameOver) return;
-        currentScore++;
+        currentScore += value;
         UpdateScoreUI();
 
         if (eatBeanClip != null)
@@ -154,13 +154,13 @@ public class GameManager : MonoBehaviour
     void UpdateScoreUI()
     {
         if (scoreText != null)
-            scoreText.text = "Bean£º" + currentScore + " / " + targetBeanCount;
+            scoreText.text = "Beanï¿½ï¿½" + currentScore + " / " + targetBeanCount;
     }
 
     void UpdateTimeUI()
     {
         if (timeText != null)
-            timeText.text = "Time£º" + Mathf.Ceil(currentTime).ToString();
+            timeText.text = "Timeï¿½ï¿½" + Mathf.Ceil(currentTime).ToString();
     }
 
     public bool IsBeanCollectedEnough()
@@ -207,11 +207,11 @@ public class GameManager : MonoBehaviour
             PlayerControl.Instance.OnGameOver();
     }
 
-    // ²Ëµ¥°´Å¥£º·µ»ØÖ÷²Ëµ¥
+    // ï¿½Ëµï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½
     public void BackToMainMenu()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("start"); // Ö÷²Ëµ¥³¡¾°Ãû
+        SceneManager.LoadScene("start"); // ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 
 
